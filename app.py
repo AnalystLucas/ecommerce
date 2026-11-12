@@ -7,6 +7,7 @@ from bson.errors import InvalidId
 from datetime import datetime 
 from config import Config
 from whatsapp import WhatsApp
+import requests
 import re
 import os
 import bd
@@ -23,6 +24,10 @@ app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1)
 Config.validacao()
 
 app.secret_key=Config.SECRET_KEY
+
+#Função para tratar mensagem de retorno ao usuário.
+def tratativa_front(mensagem, status):
+    return jsonify({"mensagem": mensagem, "status": status})
 
 # Rotas Estaticas Site
 @app.route("/")
@@ -375,9 +380,15 @@ def inserir_pedidos():
 
 @app.route("/API/verificar/conexao")
 def verificar_conexao():
-    
-    res = WhatsApp.verificar_conexao()
-
+    try:
+        res = WhatsApp.verificar_conexao()
+    except requests.exceptions.Timeout:
+        return tratativa_front("API demorou para responder !", "erro"), 504
+    except requests.exceptions.ConnectionError:
+        return tratativa_front("Não foi possivel se conectar a API", "erro"), 502
+    except requests.exceptions.HTTPError:
+        return tratativa_front("erro na API", "erro"), 502
+        
     if res == "notAuthorized":
         return jsonify({"mensagem": "WhatsApp deslogado!", "status": "erro"}), 409
     
@@ -446,6 +457,7 @@ def filtro_departamento():
     return render_template("produtos.html", produtos=filtro_dep, departamentos=dep), 200
 
 
+#Rota que não ajuda não quebrar o front.
 @app.errorhandler(Exception)
 def erro_geral(e):
     app.logger.exception("Erro não trtado")

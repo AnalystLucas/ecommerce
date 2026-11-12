@@ -62,32 +62,28 @@ function adiciona_item_carrinho() {
 
         e.preventDefault();
         let dados = dadosLocal('produtos');
-
-        // Se não tem dados vai inserir
-        if (dados.length === 0) {
-            // Criando os dados que será entregue.
-            dados.push({ id: link.dataset.id_item, item: link.dataset.item, preco: link.dataset.preco, imagem: link.dataset.imagem, qtd: 1 })
-
-            // Adicionando os dados no storage
-            mani_dadosLocal('produtos', dados)
+        produto = dados.find(item => item.id === link.dataset.id_item)
+        
+        // Verifica se já existe e se exister soma 
+        if (produto) {
+            produto.qtd += 1
+            alert(`${produto.item} qtd: ${produto.qtd}`)
         }
 
         else {
-            // caso já tenha dados, recupera eles e verificar se já existe
-
-            encontrado = dados.some(item => item.id === link.dataset.id_item)
-
-            if (encontrado) {
-                alert("Produto já adicionado!")
-                return
-            }
-
-            // Criando os dados que será entregue.
-            dados.push({ id: link.dataset.id_item, item: link.dataset.item, preco: link.dataset.preco, imagem: link.dataset.imagem, qtd: 1 })
-
-            mani_dadosLocal('produtos', dados)
+            // Caso não tem o produto, vai criar e adicionar .
+            dados.push({ 
+                id: link.dataset.id_item, 
+                item: link.dataset.item,
+                preco: link.dataset.preco, 
+                imagem: link.dataset.imagem, 
+                qtd: 1 
+            })
+            
         }
-
+        
+        mani_dadosLocal('produtos', dados)
+        
         carrinho_b.textContent = dados.length;
 
     });

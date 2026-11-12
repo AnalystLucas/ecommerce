@@ -79,6 +79,7 @@ function adiciona_item_carrinho() {
                 imagem: link.dataset.imagem, 
                 qtd: 1 
             })
+            alert(`${link.dataset.item} Adicionado ao Carrinho`)
             
         }
         

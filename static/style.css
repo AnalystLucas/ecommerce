@@ -38,7 +38,6 @@
 }
 header {
     width: 100%;
-    max-width: 1440px;
     margin: 0 auto;
     box-shadow: 0 0 5px var(--sombraM);
 }
@@ -124,7 +123,7 @@ main { /* Padrão da Pagina da ADM unico lugar que esta nessa formatação */
     border: 2px solid rgba(193, 195, 197, 0.5);
     transition: .2s;
     box-shadow: 0 0 5px var(--sombraM);
-    margin-top: clamp(280px, 30vw, 410px);
+    margin-top: clamp(320px, 33vw, 440px);
 }
 
 .btn a{
@@ -431,6 +430,7 @@ main { /* Padrão da Pagina da ADM unico lugar que esta nessa formatação */
 .checkout:hover{
     color: var(--azulC)
 }
+
 /* ---------- LISTA ---------- */
 .carrinho-itens {
     display: flex;
@@ -848,7 +848,6 @@ form img {
     object-fit: contain;
     aspect-ratio: 16/9;
 }
-
 /* ADM WhatsApp */
 
 .w-config{

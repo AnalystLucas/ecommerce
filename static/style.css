@@ -15,7 +15,8 @@
     --sombraM: rgba(0, 0, 0, 0.5);
     --sombraF: rgba(0, 0, 0, 0.3);
     --line: #e4e3e3;
-    --largura-card: clamp(120px, 25vw, 240px);
+    /* --largura-card: clamp(120px, 25vw, 240px); */
+    --largura-card: clamp(160px, 23vw, 220px);
     
     
 }
@@ -313,15 +314,14 @@ main { /* Padrão da Pagina da ADM unico lugar que esta nessa formatação */
     justify-content: center;
     flex-wrap: wrap;
     margin: auto;
-    width: 90%;
-
+    width: 95%;
 }
 
 .b-card {
     width: 95%;
-    margin: 25px auto;
+    /* margin: 25px auto; */
     display: grid;
-    grid-template-columns: repeat(auto-fill, var(--largura-card));;
+    grid-template-columns: repeat(auto-fill, var(--largura-card));
     justify-content: space-evenly;
     gap: 15px
 }
@@ -340,10 +340,10 @@ main { /* Padrão da Pagina da ADM unico lugar que esta nessa formatação */
     flex-direction: column;
     padding: 8px 8px;
     width: 100%;
-    background-color: var(--cinzaE);
+    background-color: var(--cinzaC);
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 0 5px var(--sombraG);
+    box-shadow: 0 0 5px var(--sombraM);
     box-sizing: border-box;
 }
 
@@ -351,7 +351,7 @@ main { /* Padrão da Pagina da ADM unico lugar que esta nessa formatação */
     margin: auto;
     object-fit: contain;
     width: 95%;
-    height: 70px;
+    height: 140px;
     aspect-ratio: 16/9;
     background: var(--branco);
     border-radius: 8px;
@@ -363,13 +363,13 @@ main { /* Padrão da Pagina da ADM unico lugar que esta nessa formatação */
 }
 
 .titulo-p {
-    font-size: 14px; 
+    font-size: 15px; 
 
 }
 
 .preco-p {
     font-weight: 600;
-    font-size: 12px;
+    font-size: 18px;
 }
 
 .icon {

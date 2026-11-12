@@ -44,3 +44,23 @@ class WhatsApp:
         r.raise_for_status
         
         return r.json()
+    
+    @classmethod
+    def enviar_mensagem(cls, destino, mensagem):
+        url = f"{WhatsApp.URL}/sendMessage/{Config.TOKEN_GREENAPI}"
+        
+        payload = {
+           "chatId": "55"+destino+"@c.us", 
+           "message": mensagem, 
+           "typingTime": 1000,  
+        }
+        
+        headers = {
+            'Content-Type': 'Application/json'
+        }
+        
+        r = requests.post(url, json=payload, headers=headers, timeout=30)
+        
+        r.raise_for_status()
+        
+        return r

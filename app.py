@@ -414,12 +414,6 @@ def desconectar():
     
     return jsonify({"mensagem": "Não foi possivel Desconectar!", "status": "erro"}), 200
 
-
-#Rota personalizada de pagina não encontrada.
-@app.errorhandler(404)
-def pg_nao_encontrada(error):
-    return render_template("pagina_404.html"), 404
-
 # Rotas Operacionais Sites
 @app.route("/filtro/departamentos", methods=['POST'])
 def filtro_departamento():
@@ -450,8 +444,17 @@ def filtro_departamento():
         return jsonify({"mensagem": "Não foi possivel acessar o banco!", "status": "erro"}), 500
     
     return render_template("produtos.html", produtos=filtro_dep, departamentos=dep), 200
-    
 
+
+@app.errorhandler(Exception)
+def erro_geral(e):
+    app.logger.exception("Erro não trtado")
+    return jsonify({"mensagem": "Erro interno do sistema.", "status": "erro"}), 500
+    
+#Rota personalizada de pagina não encontrada.
+@app.errorhandler(404)
+def pg_nao_encontrada(error):
+    return render_template("pagina_404.html"), 404
 
 
 if __name__ == "__main__":

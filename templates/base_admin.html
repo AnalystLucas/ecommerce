@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>{% block title%} {% endblock%}</title>
+</head>
+
+<body>
+    <header>
+        <div class="painel-h">
+            <h1>Mercado da Ju | Painel </h1>
+        </div>
+
+        <nav>
+            <a href="/admin/painel-produtos" class="produtos" >Produtos</a>
+            <a href="/admin/pedidos" class="pedidos" >Pedidos</a>
+            <a href="/admin/novo-produto" class="novo-produto" > Novo Produto</a>
+            <a href="/admin/WhatsApp" class="WhatsApp" > WhatsApp</a>
+        </nav>
+
+    </header>
+    {% block content %}
+
+    {% endblock%}
+
+    <script src="{{url_for('static', filename='js/app.js')}}"></script>
+</body>
+
+</html>

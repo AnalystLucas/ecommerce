@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title%} Mercado da Ju | Login {% endblock%}
+
+{% block content %}
+<!-- <header>
+   <img src="{{url_for('static', filename='/img/Logo_Mercado_Ju_2.jpeg')}}" alt="">
+</header> -->
+
+<main class="admin-l">
+    <div class="admin-c">
+
+        <div class="admin-hl"> <!-- admin-hl igual a admin-headerlogin -->
+            <span class="login-t">Mercado da JU </span>
+            <span class="login-st">Admin</span>
+        </div>
+
+        <div class="admin-f">
+            
+            <div class="campo">
+                <label for="usuario">Usuário</label>
+                <input type="text" name="usuario" id="usuario" placeholder="Digite seu usuário...">
+            </div>
+
+            <div class="campo">
+                <label for="senha">Senha</label>
+                <input type="password" name="senha" id="senha" placeholder="Digite sua senha...">
+            </div>
+
+            <a href="#" class="btn-submit" id="logar">Logar</a>
+        </div>
+
+    </div>
+</main>
+
+{% endblock%}

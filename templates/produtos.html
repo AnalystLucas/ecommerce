@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+
+{% block title%} Mercado da Ju | Produtos {% endblock%}
+
+{% block content %}
+<header>
+    <div class="container-p">
+
+        <div class="h-produtos">
+
+            <div class="h-topo">
+                <a href="/" class="h-icone" aria-label="Voltar">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-undo-2 preview-icon">
+                        <path d="M9 14 4 9l5-5" />
+                        <path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5a5.5 5.5 0 0 1-5.5 5.5H11" />
+                    </svg>
+                </a>
+                
+                <div class="h-carrinho">
+                    <a href="/carrinho" class="h-icone"><span class="h-titulo">Carrinho</span></a>
+                    <a href="/carrinho" class="h-icone" aria-label="Ver carrinho">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-shopping-cart preview-icon">
+                            <path d="m2.05 2.05 1.099-.028a1 1 0 0 1 1.008.815l2.69 14.347A1 1 0 0 0 7.83 18H18" />
+                            <path d="M4.563 5h16.435a1 1 0 0 1 .981 1.204l-1.026 6.226A2 2 0 0 1 18.962 14H6.25" />
+                            <circle cx="18" cy="20" r="2" />
+                            <circle cx="8" cy="20" r="2" />
+                        </svg>
+                        <span class="carrinho-badge"></span>
+                    </a>
+                </div>
+
+            </div>
+
+            <h1>Todos os Produtos</h1>
+
+        </div>
+
+        <div class="categorias">
+
+            <select name="categoria-s">
+                <option value="" selected>Todos</option>
+                {% for chave, valor in departamentos.items() %}
+                <option value="{{ chave }}">{{ valor }}</option>
+                {% endfor %}
+            </select>
+
+            <div class="pesquisa">
+                <input type="text" name="pesquisa" placeholder="Pesquisar...">
+            </div>
+
+        </div>
+
+    </div>
+</header>
+
+<main data-page="produtos">
+    
+
+    <div class="exibir-p">
+
+        <div class="b-card">
+
+            {% for produto in produtos %}
+            <div class="card">
+                {% if produto.imagem %}
+                <img src="{{ url_for('static', filename='img_prod/' ~ produto.imagem) }}" alt="{{ produto.item }}">
+                {% else %}
+                <img src="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20160%2090%22%3E%3Crect%20width%3D%22160%22%20height%3D%2290%22%20fill%3D%22%23fff%22%2F%3E%3Ccircle%20cx%3D%2280%22%20cy%3D%2240%22%20r%3D%2222%22%20fill%3D%22none%22%20stroke%3D%22%23ccc%22%20stroke-width%3D%228%22%2F%3E%3Ctext%20x%3D%2280%22%20y%3D%2282%22%20font-size%3D%2211%22%20font-family%3D%22sans-serif%22%20font-weight%3D%22700%22%20fill%3D%22%23aaa%22%20text-anchor%3D%22middle%22%3ESem%20Imagem%3C%2Ftext%3E%3C%2Fsvg%3E" alt="Produto sem imagem">
+                {% endif %}
+                <p class="titulo-p">{{ produto.item }}</p>
+
+                <div class="f-card">
+                    <p class="preco-p">R$ {{ "%.2f" |format(produto.preco) | replace(".", ",") }}</p>
+                    <div class="icon">
+                        <a  class="conectar-bagde" data-id_item="{{ produto._id|string }}" data-item="{{ produto.item }}" data-preco='{{ "%.2f" |format(produto.preco) | replace(".", ",") }}' data-imagem="{{url_for('static', filename='img_prod/' ~ produto.imagem) if produto.imagem else ''}}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round"
+                                class="lucide lucide-shopping-cart-plus preview-icon">
+                                <path d="M16 5h6" />
+                                <path d="M19 2v6" />
+                                <path d="m2.05 2.05 1.099-.028a1 1 0 011.008.815l2.69 14.347A1 1 0 007.83 18H18" />
+                                <path d="M4.564 5H12" />
+                                <path d="M6.25 14h12.712a2 2 0 001.991-1.57l.172-1.041" />
+                                <circle cx="18" cy="20" r="2" />
+                                <circle cx="8" cy="20" r="2" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+            {% endfor %}
+
+    </div>
+
+</main>
+
+{% endblock%}

@@ -1,0 +1,52 @@
+{% extends 'base_admin.html' %}
+
+{% block title%} Mercado da Ju | Painel {% endblock%}
+
+{% block content %}
+
+<main>
+    <div class="painel-t">
+        <h2>Pedidos Recebidos</h2>
+        <span class="produtos-c">{{ pedidos | length }} Pedido(s)</span>
+    </div>
+
+    <div class="tabela-b">
+        <table>
+            <thead>
+                <tr>
+                    <th> Cliente </th>
+                    <th> Endereco </th>
+                    <th> Descrição do Pedido </th>
+                    <th> Data </th>
+                    <th> Valor da Compra </th>
+                    <th> Tipo de Pagamento </th>
+                    <th> Contato </th>
+                    <th> Status </th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for pedido in pedidos%}
+                    <tr>
+                        <td>{{ pedido.nome | upper }}</td>
+                        <td>{{ pedido.endereco | upper }}</td>
+                        <td>{{ pedido.descricao | replace(",","<br>") | safe | replace("['", "") | replace("']", "") | replace("'", "") }}</td>
+                        <td>{{ pedido.data.strftime("%d/%m/%Y %H:%M") }}</td>
+                        <td>R$ {{ "%.2f" |format(pedido.valor_compra) | replace(".",",") }}</td>
+                        <td>{{ pedido.tipo_pagamento }}</td>
+                        <td>{{ pedido.contato }}</td>
+                        <td>{{ pedido.status }}</td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="8">Nenhum pedido encontrado.</td>
+                    </tr>
+                {% endfor %}
+                
+            
+            </tbody>
+        </table>
+    </div>
+</main>
+
+{% endblock%}

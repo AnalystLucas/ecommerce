@@ -1,0 +1,48 @@
+{% extends 'base_admin.html' %}
+
+{% block title%} Mercado da Ju | Painel {% endblock%}
+
+{% block content %}
+
+<main data-page="WhatsApp">
+
+    <div class="painel-t">
+        <h2>Gerenciamento do WhatsApp</h2>
+    </div>
+
+    <section class="w-config">
+        <article class="w-info">
+            
+            <div class="btns">
+                <div class="reconectar">
+                    <button class="btn-padrao reconectar">Reconectar WhatsApp</button>
+                </div>
+
+                <div class="conexao">
+                    <button class="btn-padrao verificar">Verificar Conexão</button>
+                </div>
+
+                <div class="deslogar">
+                    <button class="btn-padrao desconectar">Desconectar WhatsApp</button>
+                </div>
+
+                <div class="qr">
+                    <button class="btn-padrao conectar-qr">Gerar QR</button>
+                </div>
+            </div>
+
+            
+            
+            <div class="qrcode">
+                <div class="alerta resposta"></div>
+                <!-- <img id="montarqr" src="/static/img_prod/qrCode.png" alt="qrcode" > -->
+                <img id="montarqr" src="" alt="qrcode" hidden>
+            </div>
+        
+        </article>
+    </section>
+   
+
+</main>
+
+{% endblock%}

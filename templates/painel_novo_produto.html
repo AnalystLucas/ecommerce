@@ -1,0 +1,68 @@
+{% extends 'base_admin.html' %}
+
+{% block title%} Mercado da Ju | Painel {% endblock%}
+
+{% block content %}
+
+<main data-page="{{ 'editar' if produto else 'inserir_produto'}}" data-id="{{produto._id|string if produto else ''}}">
+    <div class="painel-t" style="max-width: 520px; margin:0 auto 16px;">
+        <h2 class="titulo-c">
+            {% if produto %}
+                Editando item 
+            {% else %}
+                Novo Produto
+            {% endif %}
+        </h2>
+    </div>
+
+
+
+    <form name="{{ 'produto-f' if not produto else 'alterar-f' }}" action="#" enctype="multipart/form-data">
+        
+        <div class="campo">
+            <img class="preview" id="preview" 
+            {% if produto %} src="{{ url_for('static', filename='img_prod/' ~ produto.imagem) }}"
+            {% else %} 
+                src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='56' height='56'><rect width='56' height='56' fill='%23eee'/><path d='M14 40l10-12 8 9 5-6 5 9z' fill='%23bbb'/><circle cx='21' cy='19' r='4' fill='%23bbb'/></svg>" alt="imagem item">
+            {% endif %}
+        </div>
+
+        <input type="file" name="img-produto" id="img-produto">
+        <div class="alerta"></div>
+
+        <div class="campo">
+            <label for="codProduto">Cod. Produto</label>
+            <input type="text" name="codProduto" id="codProduto" placeholder="Ex: 0010 " maxlength="4" value="{{ produto.codProduto if produto else ''}}">
+        </div>
+
+        <div class="campo">
+            <label for="item">Item</label>
+            <input type="text" name="item" id="item" placeholder="Ex: Arroz Marca 5kg..." value="{{ produto.item if produto else ''}}">
+        </div>
+
+        
+        <div class="campo">
+            <label for="departamento">Departamento</label>
+            <select name="departamento" id="departamento">
+                <option disabled {{ 'selected' if not produto }}>Selecione...</option>
+                {% for chave, valor in departamento.items() %}
+                    <option value="{{ chave }}" {{ 'selected' if produto and produto.departamento == valor }}>{{ valor }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="campo">
+            <label for="preco">Preço</label>
+            <input type="text" name="preco" id="preco" placeholder="R$ 0,00..." value="{{ '%.2f' | format(produto.preco) | replace('.',',') if produto else '' }}">
+        </div>
+
+        <div class="btn-cadastro">
+            <button class="btn-padrao {{ 'salvar' if not produto else 'alterar' }}">{{ 'Salvar Produto' if not produto else 'Salvar Alterações'}}</button>
+            <a href="/admin/painel-produtos" class="btn-padrao cancelar"> Cancelar </a>
+        </div>
+
+    </form>
+    
+</main>
+
+{% endblock%}

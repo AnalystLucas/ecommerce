@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title%} Mercado da Ju | Carrinho {% endblock%}
+
+{% block content %}
+
+<main class="carrinho" data-page="exibir-carrinho">
+    <h1>Seu carrinho <a href="#" class="checkout">(Remover tudo)</a> </h1>
+
+    <section class="carrinho-itens">
+
+        <!-- mais itens... -->
+    </section>
+
+    <aside class="carrinho-resumo">
+        <h2>Resumo do pedido</h2>
+
+        <div class="linha subtotal"><span>Subtotal</span><span>R$ 0,00</span></div>
+        <div class="linha frete"><span>Frete <span style="font-size: 12px;">(Grátis a partir de R$ 250,00)</span></span><span>R$ 25,00</span></div>
+        <div class="linha total"><span>Total</span><span>R$ 0,00</span></div>
+
+        <div class="dados">
+            <div class="campo">
+                <label for="nome">Nome</label>
+                <input type="text" id="nome" name="nome" placeholder="Digite seu nome...">
+            </div>
+
+            <div class="campo">
+                <label for="nome">Endereço</label>
+                <input type="text" id="endereco" name="endereco" placeholder="Digite seu endereço...">
+            </div>
+
+            <div class="campo">
+                <label for="celular">Celular</label>
+                <input type="text" id="celular" name="celular" placeholder="(19) 90000-0000" inputmode="tel" maxlength="15">
+            </div>
+            
+            <div class="campo">
+                
+                <label for="pagamento">Forma de pagamento</label>
+                <select id="pagamento" name="pagamento">
+                    <option value="" selected disabled>Selecione…</option>
+                    <option value="Pix">Pix</option>
+                    <option value="Cartão de Credito">Cartão de Crédito</option>
+                    <option value="Cartão de Debito">Cartão de Débito</option>
+                    <option value="Voucher">Voucher</option>
+                </select>
+
+            </div>
+        </div>
+
+        <a href="#" class="btn-submit">Finalizar compra</a>
+        <a href="/produtos" class="link-continuar">Continuar comprando</a>
+    </aside>
+</main>
+
+
+{% endblock%}

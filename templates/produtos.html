@@ -75,8 +75,15 @@
 
                 <div class="f-card">
                     <p class="preco-p">R$ {{ "%.2f" |format(produto.preco) | replace(".", ",") }}</p>
-                    <div class="icon">
-                        <a  class="conectar-bagde" data-id_item="{{ produto._id|string }}" data-item="{{ produto.item }}" data-preco='{{ "%.2f" |format(produto.preco) | replace(".", ",") }}' data-imagem="{{url_for('static', filename='img_prod/' ~ produto.imagem) if produto.imagem else ''}}">
+
+                    <div class="acoes-card">
+                        <div class="qtd-card" role="group" aria-label="Quantidade de {{ produto.item }}">
+                            <button type="button" class="qtd-menos" aria-label="Diminuir quantidade" disabled>&minus;</button>
+                            <span class="qtd-valor" aria-live="polite">1</span>
+                            <button type="button" class="qtd-mais" aria-label="Aumentar quantidade">+</button>
+                        </div>
+
+                        <a  class="conectar-bagde" role="button" data-id_item="{{ produto._id|string }}" data-item="{{ produto.item }}" data-preco='{{ "%.2f" |format(produto.preco) | replace(".", ",") }}' data-imagem="{{url_for('static', filename='img_prod/' ~ produto.imagem) if produto.imagem else ''}}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                 stroke-linecap="round" stroke-linejoin="round"
@@ -89,6 +96,7 @@
                                 <circle cx="18" cy="20" r="2" />
                                 <circle cx="8" cy="20" r="2" />
                             </svg>
+                            <span>Adicionar</span>
                         </a>
                     </div>
                 </div>
@@ -96,8 +104,8 @@
             </div>
             {% endfor %}
 
+        </div>
     </div>
-
 </main>
 
 {% endblock%}

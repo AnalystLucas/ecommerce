@@ -351,7 +351,7 @@ main { /* Padrão da Pagina da ADM unico lugar que esta nessa formatação */
     margin: auto;
     object-fit: contain;
     width: 95%;
-    height: 140px;
+    height: 120px;
     aspect-ratio: 16/9;
     background: var(--branco);
     border-radius: 8px;
@@ -364,7 +364,7 @@ main { /* Padrão da Pagina da ADM unico lugar que esta nessa formatação */
 
 .titulo-p {
     font-size: 15px; 
-
+    flex: 1; /* ocupa o espaço livre: preço e botões ficam alinhados entre cards da mesma linha */
 }
 
 .preco-p {
@@ -372,38 +372,86 @@ main { /* Padrão da Pagina da ADM unico lugar que esta nessa formatação */
     font-size: 18px;
 }
 
-.icon {
-    width: clamp(33px, 9vw, 45px);
-    height: clamp(33px, 9vw, 45px);
-    /* align-self: flex-end; */
-    background-color: var(--cinza);
-    border-radius: 50%;
-    box-shadow: 0 0 5px var(--sombraM);
-
-}
-
-.icon a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    color: var(--preto);
-    box-sizing: border-box;
-    transition: .2s;
-}
-
-.icon a:hover{
-    cursor: pointer;
-    color: var(--azulC);
-}
-
 .f-card{
     width: 95%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
+    gap: 6px;
+}
+
+.acoes-card {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+/* Controle de quantidade: - 1 + */
+.qtd-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--cinza);
+    border-radius: 20px;
+    padding: 2px;
+}
+
+.qtd-card button {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: var(--branco);
+    color: var(--preto);
+    font-size: 16px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 0 3px var(--sombraF);
+    transition: .2s;
+}
+
+.qtd-card button:hover:not(:disabled) {
+    color: var(--azulC);
+}
+
+.qtd-card button:disabled {
+    opacity: .4;
+    cursor: not-allowed;
+}
+
+.qtd-valor {
+    flex: 1;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* Botão Adicionar (usa a mesma cor do .btn-submit) */
+.acoes-card .conectar-bagde {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    height: 28px;
+    background-color: var(--azulC);
+    color: #fff;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.acoes-card .conectar-bagde svg {
+    width: 14px;
+    height: 14px;
+}
+
+.acoes-card .conectar-bagde:hover {
+    background-color: var(--azulMedio);
 }
 
 /* Carrinho do Site */
@@ -925,7 +973,7 @@ form img {
 		width: 90%;
 	}
 	.card img {
-		height: 80px;
+		height: 120px;
 	}
 }
 

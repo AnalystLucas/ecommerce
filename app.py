@@ -348,7 +348,7 @@ def inserir_pedidos():
         if not resultado:
             return jsonify({"mensagem": "Produto" + resultado['item'] +" não encontrado!, Remova para continuar"}), 404
 
-        itens.append(resultado['item'])
+        itens.append({"item": resultado['item'], "qtd": item['qtd']})
 
         total += float(resultado["preco"]) * float(item["qtd"])
 

@@ -61,12 +61,18 @@ function adiciona_item_carrinho() {
         if (!link) return;
 
         e.preventDefault();
+
+        // Quantidade escolhida no card (- 1 +). Se não achar o controle, usa 1.
+        const bloco = link.closest(".acoes-card");
+        const campo = bloco ? bloco.querySelector(".qtd-valor") : null;
+        const qtd = campo ? (parseInt(campo.textContent) || 1) : 1;
+
         let dados = dadosLocal('produtos');
         produto = dados.find(item => item.id === link.dataset.id_item)
         
         // Verifica se já existe e se exister soma 
         if (produto) {
-            produto.qtd += 1
+            produto.qtd += qtd
             alert(`${produto.item} qtd: ${produto.qtd}`)
         }
 
@@ -77,7 +83,7 @@ function adiciona_item_carrinho() {
                 item: link.dataset.item,
                 preco: link.dataset.preco, 
                 imagem: link.dataset.imagem, 
-                qtd: 1 
+                qtd: qtd 
             })
             alert(`${link.dataset.item} Adicionado ao Carrinho`)
             
@@ -87,6 +93,37 @@ function adiciona_item_carrinho() {
         
         carrinho_b.textContent = dados.length;
 
+        // Depois de adicionar, a quantidade do card volta para 1
+        if (campo) {
+            campo.textContent = 1;
+            bloco.querySelector(".qtd-menos").disabled = true;
+        }
+
+    });
+}
+
+// Controle de quantidade (- 1 +) dentro dos cards da vitrine.
+// Usa delegação no .b-card, assim continua funcionando depois que o filtrar() troca os cards.
+function controlar_qtd_card() {
+    b_card.addEventListener('click', (e) => {
+        const botao = e.target.closest(".qtd-menos, .qtd-mais");
+        if (!botao) return;
+
+        e.preventDefault();
+
+        const bloco = botao.closest(".qtd-card");
+        const valor = bloco.querySelector(".qtd-valor");
+        const menos = bloco.querySelector(".qtd-menos");
+        let atual = parseInt(valor.textContent) || 1;
+
+        if (botao.classList.contains("qtd-mais")) {
+            if (atual < 99) atual++;
+        } else if (atual > 1) {
+            atual--;
+        }
+
+        valor.textContent = atual;
+        menos.disabled = atual <= 1;
     });
 }
 
@@ -696,6 +733,7 @@ if (page == 'admin-produtos') {
 
 if (page == 'produtos') {
     adiciona_item_carrinho()
+    controlar_qtd_card()
     
     // Adicionando o evento change no select e passando a função filtrar
     document.querySelector("select[name='categoria-s']").addEventListener("change", filtrar)

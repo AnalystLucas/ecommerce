@@ -185,6 +185,9 @@ function calcular_carrinho() {
 
     if (novo_subtotal >= 250) {
         frete = 0
+        document.querySelector(".frete").lastChild.textContent = 'R$ 0,00'
+    }else{
+        document.querySelector(".frete").lastChild.textContent = brl.format(frete)
     }
 
     if (novo_subtotal === 0) {

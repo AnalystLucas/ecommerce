@@ -399,8 +399,14 @@ def verificar_conexao():
 
 @app.route("/API/conectar/qr")
 def gerar_qr():
-    
-    res = WhatsApp.qrcode()
+    try:
+        res = WhatsApp.qrcode()
+    except requests.exceptions.Timeout:
+            return tratativa_front("API demorou para responder !", "erro"), 504
+    except requests.exceptions.ConnectionError:
+        return tratativa_front("Não foi possivel se conectar a API", "erro"), 502
+    except requests.exceptions.HTTPError:
+        return tratativa_front("erro na API", "erro"), 502
     
     if res["type"] == "qrCode": 
         return jsonify({"mensagem": res["message"], "status": "sucesso"})

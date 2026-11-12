@@ -415,7 +415,14 @@ def gerar_qr():
 
 @app.route("/API/reconectar")
 def reconectar():
-    res = WhatsApp.reconectar()
+    try:
+        res = WhatsApp.reconectar()
+    except requests.exceptions.Timeout:
+        return tratativa_front("API demorou para responder !", "erro"), 504
+    except requests.exceptions.ConnectionError:
+        return tratativa_front("Não foi possivel se conectar a API", "erro"), 502
+    except requests.exceptions.HTTPError:
+        return tratativa_front("erro na API", "erro"), 502
     
     if res["isReboot"] == True:
         return jsonify({"mensagem": "WhatsApp Reconectado!", "status": "sucesso"}), 200

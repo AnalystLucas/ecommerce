@@ -65,7 +65,13 @@ function adiciona_item_carrinho() {
         // Quantidade escolhida no card (- 1 +). Se não achar o controle, usa 1.
         const bloco = link.closest(".acoes-card");
         const campo = bloco ? bloco.querySelector(".qtd-valor") : null;
-        const qtd = campo ? (parseInt(campo.textContent) || 1) : 1;
+        const qtd = parseInt(campo.textContent);
+        // const qtd = campo ? (parseInt(campo.textContent) || 1) : 1;
+
+        if(qtd < 1){
+            alert("Não pode adicionar item sem quantidade !")
+            return
+        }
 
         let dados = dadosLocal('produtos');
         produto = dados.find(item => item.id === link.dataset.id_item)
@@ -95,7 +101,7 @@ function adiciona_item_carrinho() {
 
         // Depois de adicionar, a quantidade do card volta para 1
         if (campo) {
-            campo.textContent = 1;
+            campo.textContent = 0;
             bloco.querySelector(".qtd-menos").disabled = true;
         }
 
@@ -114,16 +120,16 @@ function controlar_qtd_card() {
         const bloco = botao.closest(".qtd-card");
         const valor = bloco.querySelector(".qtd-valor");
         const menos = bloco.querySelector(".qtd-menos");
-        let atual = parseInt(valor.textContent) || 1;
+        let atual = parseInt(valor.textContent) || 0;
 
         if (botao.classList.contains("qtd-mais")) {
             if (atual < 99) atual++;
-        } else if (atual > 1) {
+        } else if (atual >= 1) {
             atual--;
         }
 
         valor.textContent = atual;
-        menos.disabled = atual <= 1;
+        menos.disabled = atual <= 0;
     });
 }
 

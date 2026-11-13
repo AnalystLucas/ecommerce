@@ -16,7 +16,8 @@
     --sombraF: rgba(0, 0, 0, 0.3);
     --line: #e4e3e3;
     /* --largura-card: clamp(120px, 25vw, 240px); */
-    --largura-card: clamp(138px, 23vw, 220px);
+    --largura-card: clamp(130px, 40vw, 230px);
+    
     
     
 }
@@ -324,6 +325,7 @@ main { /* Padrão da Pagina da ADM unico lugar que esta nessa formatação */
     grid-template-columns: repeat(auto-fill, var(--largura-card));
     justify-content: space-evenly;
     gap: 7px;
+    padding: 0px 10px;
 }
 /* 
 .b-card {
